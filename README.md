@@ -11,3 +11,11 @@ From now (May 2024: End of Freshman Year) to my military enlistment, I have noth
 Some JavaScript files in `src/screens/` incorporate calling content from the back end. Although I mostly designed the screens, I did not contribute significantly in terms of back-end; therefore, I plan to study how the existing app's back-end system worked.
 
 I have several schedules throughout the day, so I don't aim to do a lot. Hopefully I can learn more about Node.js, a platform I plan to use for the app's back-end in the future
+
+## 2024/05/13: Conversion to SDK 51 - FAILED
+Currently, the app can't be run on the Expo Emulator since the emulator has been upgraded to SDK 51, while this project, which hasn't been renewed since April, stayed on SDK 50. 
+
+I have followed this [guide](https://docs.expo.dev/bare/upgrade/?fromSdk=50&toSdk=51#npmignore) and attempted to convert the project from SDK 50 to SDK 51 but to no avail. 
+
+## 2024/05/14: Conversion to SDK 51 - Reinstallation
+Like an Elsa, I think I just need to let it go. I plan to uninstall expo (and React Native if necessary). If both methods do not work, then I plan to wipe out the project except for work files (e.x. `/src/screens/xxx.js` and `./src/navigation/Navigation.js`) and media files (e.x. `/src/media`). 
