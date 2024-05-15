@@ -1,5 +1,5 @@
 ## Start:
-Original Repo
+[Original Repo](https://github.com/namwook0921/KSEA_App)
 I was one of three contributors/developers in the project attached above. Due to the given short constraint, the team could mostly prepare for the front end development. Despite being completely new to React Native, I truly had fun developing this project due to two reasons:
 
 1. Higher Result per Effort: Can observe my work enhancing the product in real time as observed on mobile/emulator display --> Effort seems to be better paid off than working on other fields (e.x. Algorithm, AI)
