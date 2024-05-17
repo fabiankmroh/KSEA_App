@@ -40,9 +40,8 @@ Ultimately, I decided to use the most basic version of SQL available: SQLite.
 ## 2024/05/17: SQLite
 As mentioned in the **2024/05/16** log, I believed it would be the best for me to first get basic intuition on SQL then start setting up my environment. 
 
-So I asked Claude.ai with this basic prompt: `Teach me the structure of SQLite`
-<code>Response:
-
+So I asked Claude.ai with this basic prompt: `Teach me the structure of SQLite`<br>
+**Response:**
 1. Database File:
    - An SQLite database is stored as a single file on the disk.
    - The file extension is typically `.db` or `.sqlite`.
@@ -98,4 +97,4 @@ So I asked Claude.ai with this basic prompt: `Teach me the structure of SQLite`
 
 SQLite's simplicity, small footprint, and ease of use make it a popular choice for embedded systems, mobile apps, and local data storage. It follows the basic principles of relational databases and provides a subset of SQL features.
 
-To dive deeper into SQLite, you can explore its official documentation and experiment with creating tables, inserting data, and running queries using SQLite command-line tools or libraries in your preferred programming language.</code>
+To dive deeper into SQLite, you can explore its official documentation and experiment with creating tables, inserting data, and running queries using SQLite command-line tools or libraries in your preferred programming language.
