@@ -1,0 +1,36 @@
+import sqlite3
+
+# Connect to the database (creates a new file if it doesn't exist)
+conn = sqlite3.connect('example.db')
+
+# Create a cursor object
+cursor = conn.cursor()
+
+# Execute the SQL statements to create the table and insert data
+cursor.execute('''
+    CREATE TABLE users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        email TEXT UNIQUE,
+        password TEXT,
+        major TEXT,
+        type TEXT,
+        exec BOOLEAN,
+        points INTEGER,
+        grade INTEGER,
+        fog TEXT,
+        social_group INTEGER
+    )
+''')
+
+cursor.executemany('''
+    INSERT INTO users (name, email, password, major, type, exec, points, grade, fog, social_group)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+''', [
+    ('Fabian', 'fabiankmroh@berkeley.edu', '4321', 'Data Science', 'Member', 0, 10, 1, 'App Dev', 3),
+    ('Namwook', 'namwook0921@berkeley.edu', '1234', 'Math & CS', 'Member', 0, 30, 2, 'App Dev', 2)
+])
+
+# Commit the changes and close the connection
+conn.commit()
+conn.close()
