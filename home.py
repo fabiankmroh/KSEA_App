@@ -1,17 +1,9 @@
 import streamlit as st
-from streamlit_gsheets import GSheetsConnection
+conn = st.connection('ksea_db', type='sql')
 
-# Create a connection object.
-st.write(st.secrets['connections'])
-conn = st.connection("gsheets", type=GSheetsConnection)
-df = conn.read(
-    worksheet="Events",
-    ttl="5m",
-    usecols = [0, 2],
-    nrows=3,
-)
+# View the connection contents.
+events = conn.query('SELECT * FROM events ORDER BY Date;')
+st.dataframe(events)
 
-df = df.sort_values(by=df.columns[1], ascending=True)
-df = df.reset_index(drop=True)
-
-st.dataframe(df, use_container_width=True)
+st.page_link("pages/create_events.py", label = "Create Event")
+st.page_link("pages/leaderboard.py", label = "Leaderboard")
