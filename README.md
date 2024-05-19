@@ -98,3 +98,19 @@ So I asked Claude.ai with this basic prompt: `Teach me the structure of SQLite`<
 SQLite's simplicity, small footprint, and ease of use make it a popular choice for embedded systems, mobile apps, and local data storage. It follows the basic principles of relational databases and provides a subset of SQL features.
 
 To dive deeper into SQLite, you can explore its official documentation and experiment with creating tables, inserting data, and running queries using SQLite command-line tools or libraries in your preferred programming language.
+
+## 2024/05/19: Restoration + Basic Foundation
+### Key Lessons:
+- Organize Supervisors' Instructions on a Note --> **Ensure your goal is aligned with the supervisor**
+- Knowledge over Implementation: The code can be properly implemented and edited once I have a solid knowledge of how it works. Although it may take some time, it is important to read the tutorial thoroughly. Some tutorials may only give the source code and has little explanation as it already assumes that the reader (i.e. I) will have a full intuition in the system. 
+
+### To-Do List:
+- Restore `.db` file
+   - Export Schema into `.sql` file
+- Create Single User Application
+   - Implement all functions that users will experience except for the authentication portion
+   - Sketch page interaction table on a paper
+- Separate Git Branch:
+   - `Main`: Functioning Basic Applications
+   - `Login`: Experimenting Login Logic
+   (Even if system fails while experimenting with the login logic, the main system will still be able to function and be restored if needed)

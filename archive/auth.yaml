@@ -3,14 +3,14 @@ credentials:
     jsmith:
       email: fabiankmroh@gmail.com
       name: Fabian Roh
-      password: abc # To be replaced with hashed password
+      password: abc
     rbriggs:
       email: rbriggs@gmail.com
       name: Rebecca Briggs
-      password: def # To be replaced with hashed password
+      password: def
 cookie:
   expiry_days: 30
-  key: 'random_signature_key' # Must be string
+  key: 'random_signature_key'
   name: random_cookie_name
 preauthorized:
   emails:
