@@ -114,3 +114,4 @@ To dive deeper into SQLite, you can explore its official documentation and exper
    - `Main`: Functioning Basic Applications
    - `Login`: Experimenting Login Logic
    (Even if system fails while experimenting with the login logic, the main system will still be able to function and be restored if needed)
+- Learn More about `https` Connection & Authentication w/ Claude
