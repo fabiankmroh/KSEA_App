@@ -2,7 +2,7 @@ import streamlit as st
 conn = st.connection('ksea_db', type='sql')
 
 name = st.text_input("Name", "")
-username = st.text_input("Username", "") # UNIQUE
+username = st.text_input("Username", "")
 password = st.text_input("Password", "")
 grade = st.number_input("Grade", 1)
 major = st.text_input("Major", "EECS")
