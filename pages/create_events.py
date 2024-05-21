@@ -1,15 +1,15 @@
 import streamlit as st
-conn = st.connection('ksea_db', type='sql')
+import sqlite3
 
-name = st.text_input("Name", "")
-date = st.date_input("Date")
-location = st.text_input("Location")
-body = st.text_input("Notes")
+conn = sqlite3.connect('../ksea.db')
+c = conn.cursor()
+
+eventName = st.text_input("Name", "")
+eventDate = st.date_input("Date")
+eventLocation = st.text_input("Location")
 
 if st.button("Create Event"):
-    with conn.session as session:
-        session.execute(
-            "INSERT INTO events (Name, Date, Location, Body) VALUES (:Name, :Date, :Location, :Body);", 
-            {"Name": name, "Date": date, "Location": location, "Body": body}
-        )
-        session.commit()
+    c.execute(
+            "INSERT INTO events (eventName, eventDate, eventLocation) VALUES (:eventName, :eventDate, :eventLocation);", 
+            {"eventName": eventName, "eventDate": eventDate, "eventLocation": eventLocation}
+    )
