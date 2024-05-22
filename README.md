@@ -152,3 +152,15 @@ In the end, running the Streamlit server from the main script had solved two key
 
 ## 2024/05/22: SQL Update Delay
 When testing again from last night's state, everything works properly, but when changes are made to the database, those updates are not immediately visible (not resolved by refreshing). The last remaining issue is that the server needs to be restarted for the changes to become visible.
+
+**(Update)**
+Failure. There are not many Streamlit documentations available online. Those who hand-code `.sql` files and not using Streamlit's innate `st.connection` are close to none. Out of resources, I once again relied on my best friend [Claude.ai](https://claude.ai). 
+
+Claude recommended three approaches:
+1. `st.session_state`: "Feature that allows to store and manage state variables that persist across reruns of your Streamlit application"
+
+On the verge of attempting this method. However, as I was reading Claude's explanation on **session**, I became very hesitant to use this function. Sessions allow the server to remember information across multiple requests *from the same client*. I.e. Session should be utilized when it comes to client-specific interactions (e.x. Login)
+
+
+2. `st.rerun()`:
+3. <s>Refresh (`Cmd + R`)</s> Have already tried this hundreds of times -_-
