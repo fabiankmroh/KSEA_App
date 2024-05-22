@@ -149,3 +149,6 @@ In my repo, the **main script is `login.py`** since that was the first page I wa
 However, when running the Streamlit server with pages script (i.e. under `pages/` folder), the Streamlit system begins and *is limited* at the `pages/` folder. As a result, the code `st.page_link(pages/{other_file}.py)` would cause an error since there is no `pages/` folder under `pages/`. Also, Streamlit won't be able to find the `.db` file as the `.db` file is located in the root folder, not the `pages/` folder. This also relieved my curiosity in how the Streamlit's innate file was able to detect `.db` file in `~/.streamlit/secrets.toml` without specifying the `.db` file's specific path. 
 
 In the end, running the Streamlit server from the main script had solved two key problems: `st.page_link` being unable to find pages & `.db` file access failure. Although the solution may be more than simple, I think it was a good opportunity to gain a full intuition on how the Streamlit service functions overall.
+
+## 2024/05/22: SQL Update Delay
+When testing again from last night's state, everything works properly, but when changes are made to the database, those updates are not immediately visible (not resolved by refreshing). The last remaining issue is that the server needs to be restarted for the changes to become visible.
