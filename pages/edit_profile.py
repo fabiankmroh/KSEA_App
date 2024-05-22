@@ -17,8 +17,10 @@ if st.button("Update"):
             session.execute(f"UPDATE users SET engName = '{new_engName}', krName = '{new_krName}', email = '{new_email}', major = '{new_major}' WHERE engName = '{engName}';")
             session.commit()
             st.success("User information updated successfully!")
+            st.rerun()
             
-            # Reload the updated data from the database
+
+            """# Reload the updated data from the database
             engName = conn.query('SELECT engName FROM users WHERE userID == 1')
             krName = conn.query('SELECT krName FROM users WHERE userID == 1')
             email = conn.query('SELECT email FROM users WHERE userID == 1')
@@ -29,6 +31,7 @@ if st.button("Update"):
             st.write(f"English Name: {engName}")
             st.write(f"Korean Name: {krName}")
             st.write(f"Email: {email}")
-            st.write(f"Major: {major}")
+            st.write(f"Major: {major}")"""
         except Exception as e:
             st.error(f"An error occurred: {str(e)}")
+
