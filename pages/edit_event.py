@@ -1,18 +1,19 @@
 import streamlit as st
-import sqlite3
+conn = st.connection('ksea_db', type='sql')
 
-conn = sqlite3.connect('../ksea.db')
-c = conn.cursor()
+eventName = conn.query('SELECT eventName FROM events WHERE userID == 1')
+eventDate = conn.query('SELECT eventDate FROM events WHERE userID == 1')
+eventLocation = conn.query('SELECT eventLocation FROM events WHERE userID == 1')
 
-eventName = c.execute('SELECT eventName FROM users WHERE userID == 1')
-eventDate = c.execute('SELECT eventDate FROM users WHERE userID == 1')
-eventLocation = c.execute('SELECT eventLocation FROM users WHERE userID == 1')
+st.write(eventName)
+st.write(eventDate)
+st.write(eventLocation)
 
-new_eventName = st.text_input("English Name")
-new_eventDate = st.text_input("Korean Name")
-new_eventLocation = st.text_input("E-Mail")
+new_eventName = st.text_input("Event Name")
+new_eventDate = st.text_input("Event Date")
+new_eventLocation = st.text_input("Location")
 
 if st.button("Update"):
-    update = c.execute(f"UPDATE users SET eventName = '{new_eventName}', eventDate = '{new_eventDate}', eventLocation = '{new_eventLocation}' WHERE userID == 1;")
-    c.commit()
-    c.close()
+    with conn.session as session:
+        session.execute(f"UPDATE events SET eventName = '{new_eventName}', eventDate = '{new_eventDate}', eventLocation = '{new_eventLocation}' WHERE userID == 1;")
+        session.commit()

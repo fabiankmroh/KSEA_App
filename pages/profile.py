@@ -1,16 +1,13 @@
 import streamlit as st
-import sqlite3
-
-conn = sqlite3.connect('../ksea.db')
-c = conn.cursor()
+conn = st.connection('ksea_db', type='sql')
 
 # st.page_link("home.py", label = "Home")
 
-engName = c.execute('SELECT engName FROM users WHERE userID == 1')
-krName = c.execute('SELECT krName FROM users WHERE userID == 1')
-email = c.execute('SELECT email FROM users WHERE userID == 1')
-major = c.execute('SELECT major FROM users WHERE userID == 1')
-position = c.execute('SELECT position FROM users WHERE userID == 1')
+engName = conn.query('SELECT engName FROM users WHERE userID == 1')
+krName = conn.query('SELECT krName FROM users WHERE userID == 1')
+email = conn.query('SELECT email FROM users WHERE userID == 1')
+major = conn.query('SELECT major FROM users WHERE userID == 1')
+position = conn.query('SELECT position FROM users WHERE userID == 1')
 
 st.write(engName)
 st.write(krName)

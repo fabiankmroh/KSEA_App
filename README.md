@@ -1,5 +1,5 @@
 ## Start:
-[Original Repo](https://github.com/namwook0921/KSEA_App)
+[Original Repo](https://github.com/namwook0921/KSEA_App) <br>
 I was one of three contributors/developers in the project attached above. Due to the given short constraint, the team could mostly prepare for the front end development. Despite being completely new to React Native, I truly had fun developing this project due to two reasons:
 
 1. Higher Result per Effort: Can observe my work enhancing the product in real time as observed on mobile/emulator display --> Effort seems to be better paid off than working on other fields (e.x. Algorithm, AI)
@@ -115,3 +115,37 @@ To dive deeper into SQLite, you can explore its official documentation and exper
    - `Login`: Experimenting Login Logic
    (Even if system fails while experimenting with the login logic, the main system will still be able to function and be restored if needed)
 - Learn More about `https` Connection & Authentication w/ Claude
+
+## 2024/05/20: Creating Multiple Pages + `PATH` Error + `sqlite3` Access Method
+### `st.page_link`: `PATH` Error
+Spent most of the time configuring feature pages. With multiple pages created, I wanted to insert hyperlinks into each page. With [this documentation](https://docs.streamlit.io/develop/api-reference/widgets/st.page_link), I was able ot configure this feature using `st.page_link`. 
+
+However, for the `st.page_link` to link and load the correct `.py` file, [Claude](https://claude.ai/) advised me to place all the pages `.py` files under the folder `pages`. I will explain the reason below. 
+
+Normal HTML `<a href>` tag works *relatively*. For instance, if a page is located at `pages/a.html`, and I want to connect it to `b.html` (under root folder), then `a.html` should be written `<a href = "../b.html">`. 
+
+Streamlit's `st.page_link` works *constantly*. There are *two types* of script (page `.py` files) in Streamlit: main script & page scripts. The main script is located at the **root folder of the project**. Think of this as the first page that would be shown when you load up the Streamlit server. The page scripts are located under `./pages/` folder. Streamlit system first dives from the project's **root directory** then scans into the `pages/` folder and find the matching `.py` file. Little did I know how the difference between these two types would be a key to solving this problem. 
+
+As mentioned above, the purpose of this project is to grow back-end knowledge: utilize SQL and *read/write* data from the customer end. There was a bigger problem to solve than this page link: `sqlite` server could not be connected.
+
+## `sqlite3` Access Denied
+Before many pages were relocated to `pages/` folder, it was not difficult to access and edit the `.db` file as `.db` file and `.py` files were all on the same path. However, there were access errors to the `.db` file. For example, when I wanted to load the event information via `conn.query('SELECT * FROM events')`, the system would either prompt that it could not find the database or the table itself. 
+
+Being tired from Streamlit's *constant* file finding scheme, I pivoted from the standard [`st.connections.SQLConnection`](https://docs.streamlit.io/develop/api-reference/connections/st.connections.sqlconnection) and its sub-features, such as `conn.query` and `conn.execute`, to `sqlite3` connection. 
+
+Inspired by this [YouTube Video](https://youtu.be/_Vu3Esh4OiY?si=uX-I9fipIvAjDhUD), I used `sqlite3` library. With this, I was able to successfully connect, write and edit the database. **However, Streamlit could not comprehend the database format imported via `sqlite3` library**. For example, Streamlit would print weird SQL layout instead of the data itself. 
+
+# 2024/05/21: Fixing Errors + Revert to Original `st.connection`
+Apparently, the `st.page_link` error seems to be an innate (Streamlit) bug that has been around for a while according to [this thread](https://github.com/streamlit/streamlit/issues/8070). Some Windows users commented that explicitly assigning the entire pathname seemed to resolve the issue, but it didn't seem to be quite effective for Mac -_-
+
+Without gaining a lot from the internet, I sat down after having a good dinner and re-read the error: `**StreamlitAPIException:** Could not find page: 'pages/name.py'. Must be the file path relative to the *main script*`. With attempts in decomposing the error, I found the solution in the most absurd way. By going back to the [basic tutorial](https://docs.streamlit.io/get-started/fundamentals/main-concepts), I learned what the *main script* was and how the Streamlit server functioned, hence I was able to write the difference between the main script and the page scripts. 
+
+Shortly speaking, **every Streamlit service should be always run from the main script**. I.e. we should *not* run Streamlit scripts under the `pages` folder. Running the Streamlit service from the main script (instead of pages scripts) had solved every `page_link` issue and `.db` connection issue. 
+
+To be specific, when the command `streamlit run script.py` is executed on the terminal, the Streamlit server is hosted on the `script.py`, and every command seems to revolve with the page in center. 
+
+In my repo, the **main script is `login.py`** since that was the first page I wanted the users to see when they load up the site. Then, every Streamlit function would revolve around the root repository. For example, the `st.page_link('pages/home.py)` makes sense since the streamlit system begins in the root directory. With its beginning in the root directory, the Streamlit system is then able to find and navigate into the `pages` folder. This would not cause any errors for the Streamlit library. 
+
+However, when running the Streamlit server with pages script (i.e. under `pages/` folder), the Streamlit system begins and *is limited* at the `pages/` folder. As a result, the code `st.page_link(pages/{other_file}.py)` would cause an error since there is no `pages/` folder under `pages/`. Also, Streamlit won't be able to find the `.db` file as the `.db` file is located in the root folder, not the `pages/` folder. This also relieved my curiosity in how the Streamlit's innate file was able to detect `.db` file in `~/.streamlit/secrets.toml` without specifying the `.db` file's specific path. 
+
+In the end, running the Streamlit server from the main script had solved two key problems: `st.page_link` being unable to find pages & `.db` file access failure. Although the solution may be more than simple, I think it was a good opportunity to gain a full intuition on how the Streamlit service functions overall.
