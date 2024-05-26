@@ -164,3 +164,5 @@ On the verge of attempting this method. However, as I was reading Claude's expla
 
 2. `st.rerun()`:
 3. <s>Refresh (`Cmd + R`)</s> Have already tried this hundreds of times -_-
+
+bye streamlit...
